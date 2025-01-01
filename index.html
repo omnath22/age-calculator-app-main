@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Age calculator app</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Big+Shoulders+Display:wght@100..900&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Kumbh+Sans:wght@100..900&family=League+Spartan:wght@100..900&family=Lexend+Deca:wght@100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    :root{
+--Purple: hsl(259, 100%, 65%);
+--Lightred: hsl(0, 100%, 67%);
+
+--White: hsl(0, 0%, 100%);
+--Offwhite: hsl(0, 0%, 94%);
+--Lightgrey: hsl(0, 0%, 86%);
+--Smokeygrey: hsl(0, 1%, 44%);
+--Offblack: hsl(0, 0%, 8%);
+    }
+
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body{
+      height: 100vh;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--Lightgrey);
+      font-family: Poppins;
+    }
+    .container{
+      width:800px;
+      background-color: var(--White);
+      border-radius: 20px 20px 160px 20px;
+      padding:50px;
+    }
+    .row{
+      display:flex;
+      gap:30px;
+    }
+    .input p:first-child{
+      font-weight: 600;
+      color: var(--Smokeygrey);
+    }
+    .input p:last-child{
+      color: var(--Lightred);
+      font-style: italic;
+    }
+    input{
+      padding:20px;
+      width:150px;
+      border-radius: 8px;
+      font-size:  32px;
+      margin-top: 10px;
+      font-weight: 600;
+      border: 1px solid var(--Lightgrey);
+      outline: none;
+      margin-bottom: 5px;
+    }
+    input:hover,:focus{
+      border-color: var(--Purple);
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+        .divider-button-container{
+      margin-top: 50px;
+      position: relative;
+    }
+
+    .divider{
+      border-top: 1px solid var(--Lightgrey);
+      width:95%;
+    }
+    button{
+      outline: none;
+      border: none;
+      border-radius: 50%;
+      padding:20px;
+      background-color: var(--Purple);
+      position: absolute;
+      top: -40px;
+      right:0;
+
+    }
+    h1{
+      font-size: 82px;
+      font-style: italic;
+    }
+    span{
+      color: var(--Purple);
+      margin-right: 5px;
+    }
+    .result{
+      margin-top: 30px;
+    }
+    .error{
+      color: var(--Lightred);
+      font-style: italic;
+      display: none;
+    }
+
+    @media only screen and (max-width:600px){
+      .container{
+        width:90%;
+        padding:30px 25px;
+      }
+      input{
+        width:100%;
+      }
+      button{
+        left:50%;
+        right:unset;
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="input">
+        <p class="label label-day"> DAY</p>
+        <input type="number" name="day" id="day" placeholder="DD">
+        <p class="error day-valid-error">Must be a valid day</p><p class="error day-error">This field is required</p>
+      </div>
+      <div class="input">
+        <p class="label label-month"> MONTH</p>
+        <input type="number" name="month" id="month" placeholder="MM">
+        <p class="error month-valid-error">Must be a valid month</p> <p class="error month-error">This field is required</p>
+      </div>
+      <div class="input">
+        <p class="label label-year"> YEAR</p>
+        <input type="number" name="year" id="year" placeholder="YYYY">
+        <p class="error year-valid-error">Must be a valid year</p><p class="error year-error">This field is required</p>
+      </div>
+    </div>
+
+    <div class="divider-button-container">
+      <div class="divider"></div>
+      <button><img src="./assets/images/icon-arrow.svg" alt=""></button>
+    </div>
+
+    <div class="result">
+      <h1><span class="year"> --</span>years</h1>
+      <h1><span class="month"> --</span>months</h1>
+      <h1><span class="day">--</span>days</h1>
+    </div>
+  </div>
+
+
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+  <script>
+    $("button").click(function(){
+      $(".error").hide();
+      $(".label").css({"color":"hsl(0, 1%, 44%)"});
+      $("input").css({"border-color":"hsl(0, 0%, 86%)"});
+
+      var day = $("#day").val();
+      var month = $("#month").val();
+      var year = $("#year").val();
+    
+      var currentYear = new Date().getFullYear();
+      var curentDate = new Date().getDate();
+      var currentMonth = new Date().getMonth() + 1;
+      var d = new Date();
+      d.setDate(0);
+      //console.log(curentDate, currentMonth, currentYear);
+
+      var result_date;
+      var result_month;
+      var result_year;
+ 
+     // console.log(currentYear);
+      if(!day){
+        $("#day").css({"border-color":"hsl(0, 100%, 67%)"});
+        $(".day-error").show();
+        $(".label-day").css({"color":"red"})
+      }
+      if(!month){
+        $("#month").css({"border-color":"hsl(0, 100%, 67%)"});
+        $(".month-error").show();
+        $(".label-month").css({"color":"red"})
+      }
+      if(!year){
+        $("#year").css({"border-color":"hsl(0, 100%, 67%)"});
+        $(".year-error").show();
+        $(".label-year").css({"color":"red"})
+      }
+      var flag = 0;
+      if(day>31 || day>curentDate && month == currentMonth){
+        $("#day").css({"border-color":"hsl(0, 100%, 67%)"});
+        $(".day-valid-error").show();  $(".day-error").hide();
+        $(".label-day").css({"color":"red"});
+        flag = 1;
+      }
+      if(month>12 || month>currentMonth && year == currentYear){
+        $("#month").css({"border-color":"hsl(0, 100%, 67%)"});
+        $(".month-valid-error").show();  $(".month-error").hide();
+        $(".label-month").css({"color":"red"});
+        flag = 1;
+      }
+      if(year>currentYear){
+        $("#year").css({"border-color":"hsl(0, 100%, 67%)"});
+        $(".year-valid-error").show();  $(".year-error").hide();
+        $(".label-year").css({"color":"red"});
+        flag = 1;
+      }
+
+      if(day && month && year && day<=31 && month<=12 && year<=currentYear && !flag){
+        if(curentDate<day){
+          currentMonth--;
+          curentDate+=d.getDate();
+        
+        }
+        result_date = curentDate - day;
+        if(currentMonth< month){
+          currentYear--;
+          currentMonth+=12;
+        }
+        result_month = currentMonth - month;
+        result_year = currentYear - year;
+        //console.log(result_date,result_month,result_year);
+
+        var i=0;
+        var x = setInterval(function() {
+          ++i;
+          $(".day").text(i);
+
+          if(i>=result_date){
+            clearInterval(x);
+          }
+
+        },50);
+        var j=0;
+        var y = setInterval(function() {
+          ++j;
+          $(".month").text(j);
+
+          if(j>=result_month){
+            clearInterval(y);
+          }
+
+        },50);
+        var k=0;
+        var z = setInterval(function() {
+          ++k;
+          $(".year").text(k);
+
+          if(k>=result_year){
+            clearInterval(z);
+          }
+
+        },50);
+
+
+
+
+      //  $(".day").text(result_date);
+      //  $(".month").text(result_month);
+       // $(".year").text(result_year);
+
+      }
+    });
+
+
+  
+  </script>
+
+
+</body>
+</html>
